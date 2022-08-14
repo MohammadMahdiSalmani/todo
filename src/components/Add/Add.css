@@ -1,0 +1,16 @@
+form input {
+    border: none;
+    outline: none;
+    width: 50vw;
+    border-bottom: 2px solid #010101;
+    padding: .5rem 1rem;
+    font-size: 1.5rem;
+    border-radius: 0;
+}
+
+@media only screen and (max-width: 415px) {
+    form input {
+        width: 70vw;
+        font-size: 1.2rem;
+    }
+}

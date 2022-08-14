@@ -1,0 +1,18 @@
+@font-face {
+    font-family: chillit;
+    src: url(./fonts/chillit.ttf);
+}
+
+@font-face {
+    font-family: shabnam;
+    src: url(./fonts/shabnam.ttf);
+}
+
+
+html {
+    font-family: shabnam;
+}
+
+input {
+    font-family: shabnam;
+}

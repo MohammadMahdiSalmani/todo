@@ -1,0 +1,21 @@
+li {
+    list-style: none;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 20px 40px -5px;
+    margin: .8rem;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: left;
+    position: relative;
+    width: 95%;
+    min-height: 8rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media only screen and (max-width: 415px) {
+    li {
+        min-height: 8rem;
+    }
+}

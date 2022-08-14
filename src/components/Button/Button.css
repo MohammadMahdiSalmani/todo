@@ -1,0 +1,48 @@
+.btn {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 4rem;
+    font-size: 1rem;
+    padding: .5rem;
+    margin: .2rem;
+    border-radius: 5px;
+    transition: all ease-in-out .3s;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .btn {
+        width: 3.5rem;
+        font-size: .8rem;
+        margin: .1rem;
+        font-weight: bold;
+    }
+}
+
+.btn-danger {
+    color: #ff0000;
+}
+
+.btn-danger:hover {
+    color: white;
+    background-color: #ff0000;
+}
+
+.btn-info {
+    color: #0086c9;
+}
+
+.btn-info:hover {
+    color: white;
+    background-color: #0086c9;
+}
+
+.btn-success {
+    color: #00ae00;
+}
+
+.btn-success:hover {
+    color: white;
+    background-color: #00ae00;
+}
