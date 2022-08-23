@@ -3,7 +3,6 @@ import Task from "../Task/Task";
 import Button from "../Button/Button";
 import Check from "../Check/Check";
 import TaskContent from "../TaskContent/TaskContent";
-// import Input from "../Input/Input";
 
 
 import "./Tasks.css"
@@ -20,7 +19,7 @@ const Tasks = () => {
         }
 
         sendRequest()
-    }, [allTasks, newValue])
+    }, [allTasks, newValue,])
 
     const deleteHandler = (id) => {
         axios.delete(`/tasks/${id}.json`)
@@ -111,28 +110,27 @@ const Tasks = () => {
             id: item,
             value: allTasks[item],
         })
-
-
-        return (
-            <section>
-                <ul>
-                    {tasks.map((item) => {
-                        return (
-                            <Task key={item.id} style={{ borderBottom: item.value.readOnly ? "none" : "3px solid #ffbc1e", borderRadius: item.value.readOnly ? "10px" : "10px 10px 0 0" }}>
-                                <TaskContent className="task-content" style={{ textDecoration: item.value.check ? 'line-through' : 'none' }} change={(event) => newValueHandler(event, item.id)} contentEditable={!item.value.readOnly}>{item.value.task}</TaskContent>
-                                <Check className="check" change={() => checkHandler(item.id)} checked={item.value.check} />
-                                <div className="controllers">
-                                    <Button btnColor="btn-info" controller={() => editHandler(item.id)} style={{ display: item.value.readOnly ? 'block' : 'none' }}>Edit</Button>
-                                    <Button btnColor="btn-danger" controller={() => deleteHandler(item.id)} style={{ display: item.value.readOnly ? 'block' : 'none' }}>Delete</Button>
-                                    <Button btnColor="btn-success" controller={() => enterHandler(item.id)} style={{ display: item.value.readOnly ? 'none' : 'block' }}>Enter</Button>
-                                </div>
-                            </Task>
-                        )
-                    })}
-                </ul>
-            </section>
-        )
     }
+
+    return (
+        <section>
+            <ul>
+                {tasks.map((item) => {
+                    return (
+                        <Task key={item.id} style={{ borderBottom: item.value.readOnly ? "none" : "3px solid #ffbc1e", borderRadius: item.value.readOnly ? "10px" : "10px 10px 0 0" }}>
+                            <TaskContent className="task-content" style={{ textDecoration: item.value.check ? 'line-through' : 'none' }} change={(event) => newValueHandler(event, item.id)} contentEditable={!item.value.readOnly}>{item.value.task}</TaskContent>
+                            <Check className="check" change={() => checkHandler(item.id)} checked={item.value.check} />
+                            <div className="controllers">
+                                <Button btnColor="btn-info" controller={() => editHandler(item.id)} style={{ display: item.value.readOnly ? 'block' : 'none' }}>Edit</Button>
+                                <Button btnColor="btn-danger" controller={() => deleteHandler(item.id)} style={{ display: item.value.readOnly ? 'block' : 'none' }}>Delete</Button>
+                                <Button btnColor="btn-success" controller={() => enterHandler(item.id)} style={{ display: item.value.readOnly ? 'none' : 'block' }}>Enter</Button>
+                            </div>
+                        </Task>
+                    )
+                })}
+            </ul>
+        </section>
+    )
 }
 
 export default Tasks
