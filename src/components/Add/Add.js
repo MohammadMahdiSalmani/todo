@@ -1,26 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../Input/Input";
-import axios from "../../axios";
 
 import "./Add.css";
+import axios from "../../axios";
 
-class Add extends React.Component {
-    state = {
-        form: {
-            task: {
-                elementType: "input",
-                elementConfig: {
-                    type: "text",
-                    placeholder: "Add a new Task",
-                },
-                value: "",
-                readOnly: true,
-                check: false,
+const Add = () => {
+    const [form, setForm] = useState({
+        task: {
+            elementType: "input",
+            elementConfig: {
+                type: "text",
+                placeholder: "Add a new Task",
             },
-        }
-    }
+            value: "",
+            readOnly: true,
+            check: false,
+        },
+    })
 
-    submitHandler = (event) => {
+    const submitHandler = (event) => {
         event.preventDefault()
 
         const formData = {
@@ -28,11 +26,11 @@ class Add extends React.Component {
             check: false
         }
 
-        for (let item in this.state.form) {
-            formData[item] = this.state.form[item].value
+        for (let item in form) {
+            formData[item] = form[item].value
 
             const updatedForm = {
-                ...this.state.form,
+                ...form,
             }
 
             const updatedElement = { ...updatedForm[item] }
@@ -41,7 +39,7 @@ class Add extends React.Component {
 
             updatedForm[item] = updatedElement
 
-            this.setState({ form: updatedForm })
+            setForm(updatedForm)
         }
 
         axios.post('/tasks.json', formData).then((response) => {
@@ -51,9 +49,9 @@ class Add extends React.Component {
         })
     }
 
-    inputChangeHandler = (event, inputElement) => {
+    const inputChangeHandler = (event, inputElement) => {
         const updatedForm = {
-            ...this.state.form,
+            ...form,
         }
 
         const updatedElement = { ...updatedForm[inputElement] }
@@ -62,37 +60,35 @@ class Add extends React.Component {
 
         updatedForm[inputElement] = updatedElement
 
-        this.setState({ form: updatedForm })
+        setForm(updatedForm)
     }
 
-    render() {
-        const elementsArray = []
+    const elementsArray = []
 
-        for (let item in this.state.form) {
-            elementsArray.push({
-                id: item,
-                config: this.state.form[item],
-            })
-        }
-
-        return (
-            <form onSubmit={this.submitHandler} >
-                {elementsArray.map((item) => {
-                    return (
-                        <Input
-                            key={item.id}
-                            elementType={item.config.elementType}
-                            elementConfig={item.config.elementConfig}
-                            value={item.config.value}
-                            change={(event) => this.inputChangeHandler(event, item.id)}
-                            maxLength="170"
-                            minLength="5"
-                        />
-                    )
-                })}
-            </form>
-        )
+    for (let item in form) {
+        elementsArray.push({
+            id: item,
+            config: form[item],
+        })
     }
+
+    return (
+        <form onSubmit={submitHandler} >
+            {elementsArray.map((item) => {
+                return (
+                    <Input
+                        key={item.id}
+                        elementType={item.config.elementType}
+                        elementConfig={item.config.elementConfig}
+                        value={item.config.value}
+                        change={(event) => inputChangeHandler(event, item.id)}
+                        maxLength="170"
+                        minLength="5"
+                    />
+                )
+            })}
+        </form>
+    )
 }
 
 export default Add
